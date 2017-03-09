@@ -88,6 +88,11 @@ public class PatientGUI extends javax.swing.JFrame {
         phoneTypeLbl.setText("Phone Service:");
 
         roomTypeInput.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select One", "Intensive Care", "Private", "Double" }));
+        roomTypeInput.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                roomTypeInputItemStateChanged(evt);
+            }
+        });
 
         nurseTypeInput.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select One", "No Nurse", "Private", "Semi-Private" }));
 
@@ -98,6 +103,13 @@ public class PatientGUI extends javax.swing.JFrame {
         submitBtn.setText("Submit");
 
         clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
+            }
+        });
+
+        daysSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 99, 1));
 
         javax.swing.GroupLayout patientInputPanelLayout = new javax.swing.GroupLayout(patientInputPanel);
         patientInputPanel.setLayout(patientInputPanelLayout);
@@ -107,44 +119,41 @@ public class PatientGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(patientInputPanelLayout.createSequentialGroup()
+                        .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(firstNameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(firstNameTxt))
+                        .addGap(18, 18, 18)
                         .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lastNameLbl)
+                            .addComponent(lastNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(daysLbl)
+                            .addComponent(daysSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(roomTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roomTypeLbl))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(patientInputPanelLayout.createSequentialGroup()
-                                .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(firstNameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(firstNameTxt))
-                                .addGap(18, 18, 18)
-                                .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lastNameLbl)
-                                    .addComponent(lastNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nurseTypeLbl)
+                                .addGap(34, 34, 34)
+                                .addComponent(tvTypeLbl))
+                            .addGroup(patientInputPanelLayout.createSequentialGroup()
+                                .addComponent(nurseTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(daysLbl)
-                                    .addComponent(daysSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(roomTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(roomTypeLbl))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(patientInputPanelLayout.createSequentialGroup()
-                                        .addComponent(nurseTypeLbl)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(tvTypeLbl))
-                                    .addGroup(patientInputPanelLayout.createSequentialGroup()
-                                        .addComponent(nurseTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tvTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(phoneTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(phoneTypeLbl)))
-                            .addComponent(inputPanelLbl))
-                        .addContainerGap(37, Short.MAX_VALUE))
+                                .addComponent(tvTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(phoneTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(phoneTypeLbl)))
+                    .addComponent(inputPanelLbl)
                     .addGroup(patientInputPanelLayout.createSequentialGroup()
                         .addComponent(submitBtn)
                         .addGap(18, 18, 18)
-                        .addComponent(clearBtn)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(clearBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         patientInputPanelLayout.setVerticalGroup(
             patientInputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,6 +260,52 @@ public class PatientGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void roomTypeInputItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_roomTypeInputItemStateChanged
+        // TODO add your handling code here:
+        System.out.println("room selected");
+        if(roomTypeInput.getSelectedItem().equals("Intensive Care")){
+            //System.out.println("room selected " + roomTypeInput.getSelectedItem());
+            nurseTypeInput.setEnabled(true);
+            phoneTypeInput.setSelectedIndex(1);
+            tvTypeInput.setSelectedIndex(1);
+            
+            phoneTypeInput.setEnabled(false);
+            tvTypeInput.setEnabled(false);
+        } // end if combo box selection is intensive care
+        else{
+            nurseTypeInput.setSelectedIndex(1);
+            nurseTypeInput.setEnabled(false);
+            
+            phoneTypeInput.setEnabled(true);
+            tvTypeInput.setEnabled(true);
+        } // end if combo box selection is not intensive care
+    }//GEN-LAST:event_roomTypeInputItemStateChanged
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        // TODO add your handling code here:
+        System.out.println("clear button clicked");
+        reSetInputs();
+        firstNameTxt.requestFocus();
+    }//GEN-LAST:event_clearBtnActionPerformed
+
+    
+    // custom methods
+    
+    private void reSetInputs(){
+        firstNameTxt.setText("");
+        lastNameTxt.setText("");
+        daysSpinner.setValue(0);
+        
+        roomTypeInput.setSelectedIndex(0);
+        nurseTypeInput.setSelectedIndex(0);
+        phoneTypeInput.setSelectedIndex(0);
+        tvTypeInput.setSelectedIndex(0);
+        
+        nurseTypeInput.setEnabled(true);            
+        phoneTypeInput.setEnabled(true);
+        tvTypeInput.setEnabled(true);        
+        
+    } // end reSetInputs
 
     /**
      * @param args the command line arguments
