@@ -6,8 +6,8 @@ package HospitalMVC;
  * Assignment:	GUi MVC example, hospital bill calculator
  *
  * Description:	use a Gui and MVC to build an app that uses a gui 
-                                        to enter patient info, dispplay patient info and calculate 
-                                       patient bills
+to enter patient info, dispplay patient info and calculate 
+patient bills
  *
  * 
  * *************************************************************
@@ -17,12 +17,12 @@ package HospitalMVC;
  {  // begin class
      // class variables 
      
-     private static int nextID = 1000;          // next patient id number
+     private static int nextID = 1000;                      // next patient id number
 
     // *********** class constants **********
      
      // constant values for individual daily rates for rooms and services
-     private static final int  icRoomRate = 395;
+     private static final int icRoomRate = 395;
      private static final int privateRoomRate = 350;
      private static final int doubleRoomRate = 310;
      
@@ -37,8 +37,8 @@ package HospitalMVC;
      private String firstName;
      private String lastName;
      
-     private int days = 0;          // days in hospital
-     private int id = 0;                // unique patient id number
+     private int days = 0;                                  // days in hospital
+     private int id = 0;                                    // unique patient id number
      
      // variables to hold service codes
      private char roomType;
@@ -55,8 +55,8 @@ package HospitalMVC;
     // ********** constructors ***********
      
      public Patient(){
-         id = nextID++;                 // assign id and increment global next id value
-         days = 0;                          // set days to 0
+         id = nextID++;                                     // assign id and increment global next id value
+         days = 0;                                          // set days to 0
          
          roomType = 'D';
          nurseType = 'X';
@@ -66,18 +66,18 @@ package HospitalMVC;
          System.out.println("creating new patient.");
      } // end default construcor
      
-     public Patient(String fn,          //first name
-                                String ln,      // last name
-                                int d,              // days
-                                char rt,            // room type
-                                char nt,            // nurse type
-                                char tvt,           // tv type
-                                char pt){            // phone type
+     public Patient(String fn,                              //first name
+                                String ln,                  // last name
+                                int d,                      // days
+                                char rt,                    // room type
+                                char nt,                    // nurse type
+                                char tvt,                   // tv type
+                                char pt){                   // phone type
          firstName = fn;
          lastName = ln;
          
-         id = nextID++;                 // assign id and increment global next id value
-         days =d;                          // set days to 
+         id = nextID++;                                     // assign id and increment global next id value
+         days =d;                                           // set days to 
          
          roomType = rt;
          nurseType = nt;
@@ -89,7 +89,7 @@ package HospitalMVC;
 
     // ********** accessors **********
 
-     //*****************************************************
+    //*****************************************************
     // Purpose: calculate and return the total cost of the room
     // Interface: IN: na
     // Returns: room bill
@@ -97,17 +97,21 @@ package HospitalMVC;
      public int getRoomCost(){
          int roomCost = 0;
          
-         if(roomType == 'I')
-             roomCost = icRoomRate * days;
-         else
-             if(roomType== 'P')
+         switch (roomType) {
+             case 'I':
+                 roomCost = icRoomRate * days;
+                 break;
+             case 'P':
                  roomCost = privateRoomRate * days;
-         else
+                 break;
+             default:
                  roomCost = doubleRoomRate * days;
+                 break;
+         }
          return roomCost;
      } // end get room cost
      
-     //*****************************************************
+    //*****************************************************
     // Purpose: calculate and return the total cost of the nurse
     // Interface: IN: na
     // Returns: nurse bill
@@ -115,17 +119,21 @@ package HospitalMVC;
      public int getNurseCost(){
          int nurseCost = 0;
          
-         if(nurseType == 'X')
-             nurseCost = 0;
-         else
-             if(nurseType== 'N')
+         switch (nurseType) {
+             case 'X':
+                 nurseCost = 0;
+                 break;
+             case 'N':
                  nurseCost = privateNurseRate * days;
-         else
+                 break;
+             default:
                  nurseCost = semiPrivateNurseRate * days;
+                 break;
+         }
          return nurseCost;
      } // end get nure cost
      
-     //*****************************************************
+    //*****************************************************
     // Purpose: calculate and return the total cost of the tv services
     // Interface: IN: na
     // Returns: tv bill
@@ -141,7 +149,7 @@ package HospitalMVC;
          return tvCost;
      } // end get tv cost
      
-     //*****************************************************
+    //*****************************************************
     // Purpose: calculate and return the total cost of the phone services
     // Interface: IN: na
     // Returns: tv bill
@@ -157,7 +165,7 @@ package HospitalMVC;
          return phoneCost;
      } // end get phone cost
      
-     //*****************************************************
+    //*****************************************************
     // Purpose: calculate and return the total bill
     // Interface: IN: na
     // Returns: total bill
@@ -169,7 +177,7 @@ package HospitalMVC;
     // *****************************************************   
      
     // ********** mutators **********
-      //*****************************************************
+    //*****************************************************
     // Purpose: change the room type code for a patient
     // Interface: IN: new room type code
     // Returns: na
@@ -178,7 +186,7 @@ package HospitalMVC;
         roomType = rt;
      } // end set room type
      
-      //*****************************************************
+    //*****************************************************
     // Purpose: change the nusre type code for a patient
     // Interface: IN: new nurse type code
     // Returns: na
@@ -187,7 +195,7 @@ package HospitalMVC;
         nurseType = nt;
      } // end set nurse type    
      
-      //*****************************************************
+    //*****************************************************
     // Purpose: change the tv type code for a patient
     // Interface: IN: new tv type code
     // Returns: na
@@ -196,7 +204,7 @@ package HospitalMVC;
         tvType = tvt;
      } // end set tv type
      
-      //*****************************************************
+    //*****************************************************
     // Purpose: change the phone type code for a patient
     // Interface: IN: new phone type code
     // Returns: na
